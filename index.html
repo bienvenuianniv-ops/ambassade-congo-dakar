@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ambassade de la République du Congo à Dakar</title>
+<meta name="description" content="Mission diplomatique de la République du Congo au Sénégal — services consulaires et prise de rendez-vous." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-deep:#08402B;
+    --green:#009543;
+    --gold:#E5B80B;
+    --red:#CE1126;
+    --paper:#FBF9F4;
+    --ink:#16201A;
+    --muted:#5C6660;
+    --line:#E4E0D6;
+    --card:#FFFFFF;
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.1;margin:0}
+  a{color:inherit}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--green);
+  }
+  .eyebrow.on-dark{color:var(--gold)}
+
+  /* Bandeau de présentation — retirer ce bloc le jour de l'officialisation */
+  .demo-bar{
+    background:var(--green-deep);color:#fff;text-align:center;
+    font-size:.78rem;letter-spacing:.02em;padding:8px 16px;font-weight:500;
+    border-bottom:2px solid var(--gold);
+  }
+
+  /* Header */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(251,249,244,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .navrow{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .crest{
+    width:38px;height:38px;border-radius:50%;flex:0 0 auto;
+    background:
+      linear-gradient(135deg,var(--green) 0 49%,var(--gold) 49% 58%,var(--red) 58% 100%);
+    border:2px solid var(--green-deep);
+  }
+  .brand b{font-family:"Fraunces",serif;font-weight:600;font-size:1.02rem;line-height:1.05}
+  .brand span{display:block;font-family:"Inter",sans-serif;font-size:.66rem;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  nav.links{display:flex;align-items:center;gap:28px}
+  nav.links a{font-size:.92rem;font-weight:500;text-decoration:none;color:var(--ink);opacity:.82}
+  nav.links a:hover{opacity:1;color:var(--green)}
+  .btn{
+    display:inline-block;font-family:"Inter",sans-serif;font-weight:600;font-size:.92rem;
+    text-decoration:none;padding:11px 20px;border-radius:6px;border:1.5px solid transparent;
+    cursor:pointer;transition:transform .12s ease,background .15s ease;
+  }
+  .btn-primary{background:var(--green-deep);color:#fff}
+  .btn-primary:hover{background:var(--green)}
+  .btn-ghost{background:transparent;border-color:var(--green-deep);color:var(--green-deep)}
+  .btn-ghost:hover{background:var(--green-deep);color:#fff}
+  .btn:focus-visible,nav.links a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .nav-cta{display:inline-block}
+  .burger{display:none}
+
+  /* Hero */
+  .hero{position:relative;overflow:hidden;background:var(--green-deep);color:#fff}
+  .hero::after{ /* diagonale signature, évoque le drapeau sans le reproduire */
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      linear-gradient(118deg,transparent 0 54%,var(--gold) 54% 57%,transparent 57% 63%,var(--red) 63% 64.5%,transparent 64.5%);
+    opacity:.85;
+  }
+  .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.5fr .9fr;gap:40px;
+    align-items:center;padding:84px 24px 92px}
+  .hero h1{font-size:clamp(2.3rem,5vw,3.7rem);font-weight:600;letter-spacing:-.01em;margin:18px 0 0}
+  .hero .lede{margin-top:20px;max-width:34ch;color:rgba(255,255,255,.85);font-size:1.06rem}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+  .hero .btn-primary{background:var(--gold);color:var(--green-deep)}
+  .hero .btn-primary:hover{background:#fff}
+  .hero .btn-ghost{border-color:rgba(255,255,255,.6);color:#fff}
+  .hero .btn-ghost:hover{background:rgba(255,255,255,.12)}
+  .seal{
+    justify-self:center;width:200px;height:200px;border-radius:50%;
+    display:grid;place-items:center;text-align:center;
+    border:2px dashed rgba(255,255,255,.4);color:rgba(255,255,255,.7);
+    font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:24px;line-height:1.5;
+  }
+  .seal b{display:block;font-family:"Fraunces",serif;font-size:1.5rem;letter-spacing:0;
+    text-transform:none;color:#fff;margin-bottom:6px}
+
+  /* Sections */
+  section{padding:80px 0}
+  .sec-head{max-width:60ch;margin-bottom:14px}
+  .sec-head h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin-top:10px}
+  .sec-head p{color:var(--muted);margin:14px 0 0}
+
+  /* Mot de l'Ambassadeur */
+  .word{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:44px;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:start}
+  .portrait{width:120px;height:150px;border-radius:8px;background:
+    repeating-linear-gradient(45deg,#eee,#eee 8px,#f6f6f6 8px,#f6f6f6 16px);
+    border:1px solid var(--line);display:grid;place-items:center;color:var(--muted);
+    font-size:.66rem;letter-spacing:.1em;text-align:center;text-transform:uppercase}
+  .word blockquote{margin:0;font-family:"Fraunces",serif;font-size:1.28rem;line-height:1.5;color:var(--ink)}
+  .word .sign{margin-top:22px;font-size:.9rem;color:var(--muted)}
+  .word .sign b{color:var(--ink);font-weight:600;display:block;font-size:1rem}
+  .placeholder-note{display:inline-block;margin-top:8px;font-size:.74rem;color:var(--red);
+    background:#fdecec;border:1px solid #f6c9c9;border-radius:4px;padding:2px 8px;letter-spacing:.02em}
+
+  /* Services */
+  #services{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+  .scard{
+    border:1px solid var(--line);border-radius:11px;padding:26px;background:var(--paper);
+    display:flex;flex-direction:column;gap:10px;transition:transform .14s ease,box-shadow .14s ease;
+    border-top:3px solid var(--green);
+  }
+  .scard:nth-child(3n-1){border-top-color:var(--gold)}
+  .scard:nth-child(3n){border-top-color:var(--red)}
+  .scard:hover{transform:translateY(-3px);box-shadow:0 12px 28px -16px rgba(8,64,43,.45)}
+  .scard h3{font-size:1.18rem}
+  .scard p{margin:0;color:var(--muted);font-size:.95rem;flex:1}
+  .scard .meta{font-size:.8rem;color:var(--green-deep);font-weight:600;letter-spacing:.03em}
+  .scard .book{margin-top:6px;font-weight:600;font-size:.92rem;text-decoration:none;color:var(--green-deep);
+    background:none;border:0;padding:0;cursor:pointer;text-align:left;font-family:inherit}
+  .scard .book:hover{color:var(--green)}
+  .scard .book::after{content:" \2192"}
+  .scard .book:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:3px}
+  .state{padding:48px 0;text-align:center;color:var(--muted)}
+  .state.err{color:var(--red)}
+  .skel{height:172px;border-radius:11px;background:linear-gradient(100deg,#f0ede5 30%,#f7f5ef 50%,#f0ede5 70%);
+    background-size:200% 100%;animation:sh 1.2s infinite}
+  @keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+  /* Infos pratiques */
+  .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+  .ibox{border:1px solid var(--line);border-radius:11px;padding:26px;background:var(--card)}
+  .ibox .eyebrow{margin-bottom:10px}
+  .ibox p{margin:4px 0;color:var(--ink)}
+  .ibox .ph{color:var(--muted);font-style:italic}
+
+  /* Footer */
+  footer.site{background:var(--green-deep);color:rgba(255,255,255,.8);padding:54px 0 30px}
+  footer .frow{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:center}
+  footer .brand b{color:#fff}
+  footer small{display:block;margin-top:24px;color:rgba(255,255,255,.55);font-size:.82rem}
+
+  @media (max-width:900px){
+    .hero-inner{grid-template-columns:1fr;gap:30px}
+    .seal{justify-self:start}
+    .grid,.info-grid{grid-template-columns:1fr 1fr}
+    .word{grid-template-columns:1fr;padding:30px}
+    nav.links{display:none}
+  }
+  @media (max-width:560px){
+    .grid,.info-grid{grid-template-columns:1fr}
+    .navrow{height:60px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;scroll-behavior:auto}
+  }
+
+  /* ---- Modale de réservation ---- */
+  .overlay{position:fixed;inset:0;z-index:100;background:rgba(8,30,20,.55);
+    display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:32px 16px}
+  .overlay.open{display:flex}
+  .modal{background:var(--paper);border-radius:14px;width:100%;max-width:560px;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,.5);overflow:hidden;margin:auto}
+  .modal-top{background:var(--green-deep);color:#fff;padding:22px 26px;display:flex;
+    align-items:center;justify-content:space-between;position:relative}
+  .modal-top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+    background:linear-gradient(90deg,var(--green) 0 40%,var(--gold) 40% 70%,var(--red) 70% 100%)}
+  .modal-top h3{font-size:1.3rem}
+  .modal-top .sub{font-size:.78rem;color:rgba(255,255,255,.7);margin-top:2px}
+  .modal-close{background:transparent;border:0;color:#fff;font-size:1.6rem;cursor:pointer;
+    line-height:1;padding:4px 8px;border-radius:6px}
+  .modal-close:hover{background:rgba(255,255,255,.15)}
+  .modal-body{padding:26px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--ink)}
+  .field label .req{color:var(--red)}
+  .field input,.field select,.field textarea{
+    width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:8px;
+    font-family:inherit;font-size:.95rem;background:#fff;color:var(--ink)}
+  .field input:focus,.field select:focus,.field textarea:focus{
+    outline:none;border-color:var(--green)}
+  .field .hint{font-size:.74rem;color:var(--muted);margin-top:4px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px}
+  .slot{padding:9px 4px;border:1.5px solid var(--line);border-radius:7px;background:#fff;
+    font-size:.86rem;cursor:pointer;text-align:center;transition:all .12s}
+  .slot:hover:not(:disabled){border-color:var(--green);color:var(--green-deep)}
+  .slot.sel{background:var(--green-deep);color:#fff;border-color:var(--green-deep)}
+  .slot:disabled{background:#f1efe8;color:#bbb;cursor:not-allowed;text-decoration:line-through}
+  .slots-msg{font-size:.82rem;color:var(--muted);padding:8px 0}
+  .submit-row{margin-top:8px}
+  .submit-row .btn{width:100%;font-size:1rem;padding:13px}
+  .submit-row .btn[disabled]{opacity:.5;cursor:not-allowed}
+  .form-err{background:#fdecec;border:1px solid #f6c9c9;color:#a01b1b;padding:10px 13px;
+    border-radius:8px;font-size:.88rem;margin-bottom:14px;display:none}
+  .form-err.show{display:block}
+  /* écran de confirmation */
+  .success{text-align:center;padding:14px 6px}
+  .success .check{width:64px;height:64px;border-radius:50%;background:var(--green);
+    color:#fff;font-size:2rem;display:grid;place-items:center;margin:0 auto 16px}
+  .success h3{font-size:1.5rem;margin-bottom:8px}
+  .success .ref{display:inline-block;margin:14px 0;font-family:"Fraunces",serif;font-size:1.4rem;
+    letter-spacing:.05em;color:var(--green-deep);background:#fff;border:1.5px dashed var(--green);
+    border-radius:8px;padding:10px 22px}
+  .success p{color:var(--muted);margin:6px 0}
+  @media (max-width:520px){
+    .row2,.slots{grid-template-columns:1fr 1fr}
+    .modal-body{padding:20px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Bandeau de présentation — retirer cette ligne le jour de l'officialisation -->
+<div class="demo-bar">Maquette de présentation — proposition soumise à l'appréciation de la Mission. Les informations seront officialisées en concertation avec l'Ambassade.</div>
+
+<header class="site">
+  <div class="wrap navrow">
+    <a class="brand" href="#top">
+      <span class="crest" aria-hidden="true"></span>
+      <span><b>République du Congo</b><span>Ambassade à Dakar</span></span>
+    </a>
+    <nav class="links" aria-label="Navigation principale">
+      <a href="#mot">Présentation</a>
+      <a href="#services">Services</a>
+      <a href="#infos">Infos pratiques</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-primary nav-cta" id="navBook">Prendre rendez-vous</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow on-dark">République du Congo · Mission diplomatique</span>
+      <h1>Ambassade de la République du Congo à Dakar</h1>
+      <p class="lede">Au service des ressortissants congolais au Sénégal et de toute personne sollicitant un visa, un acte ou une démarche consulaire.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" id="heroBook">Prendre rendez-vous</a>
+        <a class="btn btn-ghost" href="#services">Voir les services</a>
+      </div>
+    </div>
+    <div class="seal" aria-label="Emplacement réservé aux armoiries officielles">
+      <span><b>Armoiries</b>à intégrer<br>(visuel officiel)</span>
+    </div>
+  </div>
+</section>
+
+<section id="mot">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Présentation</span>
+      <h2>Mot de l'Ambassadeur</h2>
+    </div>
+    <div class="word">
+      <div class="portrait">Photo<br>officielle</div>
+      <div>
+        <blockquote>« Notre mission accueille chaque ressortissant et chaque visiteur avec rigueur et disponibilité. La modernisation de nos services consulaires vise un objectif simple : des démarches claires, des délais maîtrisés, et un accueil digne de la République. »</blockquote>
+        <div class="sign">
+          <b>L'Ambassadeur</b>
+          Ambassade de la République du Congo près la République du Sénégal
+          <span class="placeholder-note">Texte de démonstration — à valider et signer par la mission</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Démarches</span>
+      <h2>Services consulaires</h2>
+      <p>Choisissez votre démarche, puis réservez un créneau. Les pièces à fournir vous seront indiquées lors de la prise de rendez-vous.</p>
+    </div>
+    <div id="servicesGrid" class="grid" aria-live="polite">
+      <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    </div>
+  </div>
+</section>
+
+<section id="infos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Informations pratiques</span>
+      <h2>Nous rendre visite</h2>
+    </div>
+    <div class="info-grid">
+      <div class="ibox" id="contact">
+        <span class="eyebrow">Adresse</span>
+        <p class="ph">[Adresse de la chancellerie]</p>
+        <p class="ph">Dakar, Sénégal</p>
+      </div>
+      <div class="ibox">
+        <span class="eyebrow">Horaires</span>
+        <p>Lundi – Vendredi</p>
+        <p class="ph">[Heures d'ouverture du service consulaire]</p>
+      </div>
+      <div class="ibox">
+        <span class="eyebrow">Contact</span>
+        <p class="ph">[Téléphone]</p>
+        <p class="ph">[Adresse e-mail]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="frow">
+      <a class="brand" href="#top" style="text-decoration:none">
+        <span class="crest" aria-hidden="true"></span>
+        <span><b>République du Congo</b><span style="color:rgba(255,255,255,.6)">Ambassade à Dakar</span></span>
+      </a>
+      <nav class="links" style="display:flex">
+        <a href="#mot" style="color:rgba(255,255,255,.8)">Présentation</a>
+        <a href="#services" style="color:rgba(255,255,255,.8)">Services</a>
+        <a href="#infos" style="color:rgba(255,255,255,.8)">Infos pratiques</a>
+      </nav>
+    </div>
+    <small>© <span id="yr"></span> Ambassade de la République du Congo à Dakar. Maquette de présentation — proposition non encore officialisée.</small>
+  </div>
+</footer>
+
+<!-- ===== Modale de réservation ===== -->
+<div class="overlay" id="rdvOverlay" role="dialog" aria-modal="true" aria-labelledby="rdvTitle">
+  <div class="modal">
+    <div class="modal-top">
+      <div>
+        <h3 id="rdvTitle">Prendre rendez-vous</h3>
+        <div class="sub">Ambassade de la République du Congo à Dakar</div>
+      </div>
+      <button class="modal-close" id="rdvClose" aria-label="Fermer">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div id="rdvFormWrap">
+        <div class="form-err" id="f_err"></div>
+
+        <div class="field">
+          <label for="f_service">Service <span class="req">*</span></label>
+          <select id="f_service"></select>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="f_nom">Nom <span class="req">*</span></label>
+            <input id="f_nom" type="text" autocomplete="family-name">
+          </div>
+          <div class="field">
+            <label for="f_prenom">Prénom <span class="req">*</span></label>
+            <input id="f_prenom" type="text" autocomplete="given-name">
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="f_tel">Téléphone <span class="req">*</span></label>
+            <input id="f_tel" type="tel" placeholder="+221 …" autocomplete="tel">
+            <div class="hint">Pour le SMS de confirmation</div>
+          </div>
+          <div class="field">
+            <label for="f_email">E-mail</label>
+            <input id="f_email" type="email" placeholder="vous@exemple.com" autocomplete="email">
+            <div class="hint">Pour l'e-mail de confirmation</div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="f_piece">Pièce d'identité / Passeport / Carte consulaire <span class="req">*</span></label>
+          <input id="f_piece" type="text" placeholder="N° de passeport, carte consulaire ou pièce d'identité">
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="f_date">Date <span class="req">*</span></label>
+            <input id="f_date" type="date">
+          </div>
+          <div class="field">
+            <label for="f_paiement">Paiement</label>
+            <select id="f_paiement">
+              <option value="guichet">Au guichet</option>
+              <option value="mobile">Mobile Money</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Heure <span class="req">*</span></label>
+          <div class="slots" id="f_slots">
+            <div class="slots-msg">Choisissez un service et une date.</div>
+          </div>
+          <input id="f_heure" type="hidden">
+        </div>
+
+        <div class="field">
+          <label for="f_notes">Notes (facultatif)</label>
+          <textarea id="f_notes" rows="2" placeholder="Précisions sur votre demande…"></textarea>
+        </div>
+
+        <div class="submit-row">
+          <button class="btn btn-primary" id="f_submit">Confirmer le rendez-vous</button>
+        </div>
+      </div>
+
+      <div class="success" id="rdvSuccess" style="display:none">
+        <div class="check">&#10003;</div>
+        <h3>Rendez-vous confirmé</h3>
+        <p>Conservez précieusement votre référence :</p>
+        <div class="ref" id="refValue">—</div>
+        <p>Une confirmation vous a été envoyée par e-mail et SMS si vous les avez renseignés.</p>
+        <p>Présentez cette référence à l'accueil de l'ambassade le jour du rendez-vous.</p>
+        <div class="submit-row">
+          <button class="btn btn-ghost" onclick="document.getElementById('rdvOverlay').classList.remove('open');document.body.style.overflow='';">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIGURATION — à renseigner
+   ============================================================ */
+const API_BASE   = "https://mairie-rdv-backend.onrender.com"; // URL de ton backend Render
+const MAIRIE_ID  = 4;                                     // l'ambassade = entité 4
+/* La prise de rendez-vous est intégrée à la page (modale → /api/rdv) */
+/* ============================================================ */
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const grid = document.getElementById('servicesGrid');
+
+function escapeHtml(s){
+  return String(s ?? '').replace(/[&<>"']/g, c =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderState(html, cls=''){
+  grid.classList.remove('grid');
+  grid.innerHTML = `<div class="state ${cls}">${html}</div>`;
+}
+
+async function loadServices(){
+  if(API_BASE.includes('VOTRE-BACKEND')){
+    renderState("Renseignez l'URL de votre backend dans <code>API_BASE</code> pour afficher les services.");
+    return;
+  }
+  try{
+    const res = await fetch(`${API_BASE.replace(/\/$/,'')}/api/services?mairie_id=${MAIRIE_ID}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
+    if(!Array.isArray(data) || data.length === 0){
+      renderState("Aucun service n'est disponible pour le moment.");
+      return;
+    }
+    grid.classList.add('grid');
+    grid.innerHTML = data.map(s => `
+      <article class="scard">
+        <h3>${escapeHtml(s.nom)}</h3>
+        <p>${escapeHtml(s.description || 'Démarche consulaire.')}</p>
+        ${s.duree_min ? `<span class="meta">Rendez-vous ~ ${escapeHtml(s.duree_min)} min</span>` : ''}
+        <button class="book" type="button" data-service="${escapeHtml(s.id)}">Prendre rendez-vous</button>
+      </article>`).join('');
+    // alimenter le formulaire et brancher les boutons des cartes
+    if(window.__setServices) window.__setServices(data);
+    grid.querySelectorAll('.book[data-service]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(window.__openRdv) window.__openRdv(btn.dataset.service);
+      });
+    });
+  }catch(err){
+    renderState("Les services n'ont pas pu être chargés. Vérifiez la connexion au backend.", 'err');
+    console.error(err);
+  }
+}
+loadServices();
+
+/* ============================================================
+   RÉSERVATION — formulaire branché sur /api/rdv
+   ============================================================ */
+const overlay   = document.getElementById('rdvOverlay');
+const formWrap  = document.getElementById('rdvFormWrap');
+const successEl = document.getElementById('rdvSuccess');
+const selService = document.getElementById('f_service');
+const inpDate   = document.getElementById('f_date');
+const slotsBox  = document.getElementById('f_slots');
+const inpHeure  = document.getElementById('f_heure');
+const formErr   = document.getElementById('f_err');
+const submitBtn = document.getElementById('f_submit');
+let SERVICES = [];
+
+// Date minimale = aujourd'hui
+inpDate.min = new Date().toISOString().split('T')[0];
+
+function fillServiceSelect(){
+  selService.innerHTML = '<option value="">— Choisissez un service —</option>' +
+    SERVICES.map(s => `<option value="${escapeHtml(s.id)}">${escapeHtml(s.nom)}</option>`).join('');
+}
+
+function openModal(serviceId){
+  formErr.classList.remove('show');
+  formWrap.style.display = 'block';
+  successEl.style.display = 'none';
+  if(serviceId) selService.value = String(serviceId);
+  slotsBox.innerHTML = '<div class="slots-msg">Choisissez une date pour voir les créneaux.</div>';
+  inpHeure.value = '';
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('rdvClose').addEventListener('click', closeModal);
+overlay.addEventListener('click', e => { if(e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+// Boutons d'en-tête / hero
+['navBook','heroBook'].forEach(id=>{
+  const el = document.getElementById(id);
+  if(el){ el.removeAttribute('href'); el.style.cursor='pointer';
+    el.addEventListener('click', ()=>openModal()); }
+});
+
+// Charger les créneaux quand service + date sont choisis
+async function chargerCreneaux(){
+  const sid = selService.value, d = inpDate.value;
+  inpHeure.value = '';
+  if(!sid || !d){ slotsBox.innerHTML = '<div class="slots-msg">Choisissez un service et une date.</div>'; return; }
+  slotsBox.innerHTML = '<div class="slots-msg">Chargement des créneaux…</div>';
+  try{
+    const res = await fetch(`${API_BASE.replace(/\/$/,'')}/api/rdv/disponibles?service_id=${encodeURIComponent(sid)}&date=${encodeURIComponent(d)}`);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const creneaux = await res.json();
+    slotsBox.innerHTML = creneaux.map(c =>
+      `<button type="button" class="slot" data-h="${c.heure}" ${c.disponible?'':'disabled'}>${c.heure}</button>`
+    ).join('');
+    slotsBox.querySelectorAll('.slot:not(:disabled)').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        slotsBox.querySelectorAll('.slot').forEach(x=>x.classList.remove('sel'));
+        b.classList.add('sel');
+        inpHeure.value = b.dataset.h;
+      });
+    });
+  }catch(err){
+    slotsBox.innerHTML = '<div class="slots-msg">Créneaux indisponibles pour le moment.</div>';
+    console.error(err);
+  }
+}
+selService.addEventListener('change', chargerCreneaux);
+inpDate.addEventListener('change', chargerCreneaux);
+
+// Soumission
+submitBtn.addEventListener('click', async ()=>{
+  formErr.classList.remove('show');
+  const payload = {
+    service_id:    selService.value,
+    citoyen_nom:   document.getElementById('f_nom').value.trim(),
+    citoyen_prenom:document.getElementById('f_prenom').value.trim(),
+    citoyen_tel:   document.getElementById('f_tel').value.trim(),
+    citoyen_email: document.getElementById('f_email').value.trim(),
+    citoyen_nni:   document.getElementById('f_piece').value.trim(),
+    date_rdv:      inpDate.value,
+    heure_rdv:     inpHeure.value,
+    paiement:      document.getElementById('f_paiement').value,
+    notes:         document.getElementById('f_notes').value.trim()
+  };
+  // Validations côté vitrine
+  const manquants = [];
+  if(!payload.service_id)    manquants.push('le service');
+  if(!payload.citoyen_nom)   manquants.push('le nom');
+  if(!payload.citoyen_prenom)manquants.push('le prénom');
+  if(!payload.citoyen_tel)   manquants.push('le téléphone');
+  if(!payload.citoyen_nni)   manquants.push("la pièce d'identité");
+  if(!payload.date_rdv)      manquants.push('la date');
+  if(!payload.heure_rdv)     manquants.push("l'heure");
+  if(manquants.length){
+    formErr.textContent = 'Merci de renseigner : ' + manquants.join(', ') + '.';
+    formErr.classList.add('show');
+    return;
+  }
+  submitBtn.disabled = true; submitBtn.textContent = 'Envoi en cours…';
+  try{
+    const res = await fetch(`${API_BASE.replace(/\/$/,'')}/api/rdv`, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if(!res.ok){
+      formErr.textContent = data.message || 'Une erreur est survenue. Réessayez.';
+      formErr.classList.add('show');
+      return;
+    }
+    // Succès
+    document.getElementById('refValue').textContent = data.rdv?.reference || '—';
+    formWrap.style.display = 'none';
+    successEl.style.display = 'block';
+  }catch(err){
+    formErr.textContent = "Impossible de joindre le serveur. Vérifiez votre connexion.";
+    formErr.classList.add('show');
+    console.error(err);
+  }finally{
+    submitBtn.disabled = false; submitBtn.textContent = 'Confirmer le rendez-vous';
+  }
+});
+
+// Rendre openModal accessible aux cartes de services
+window.__openRdv = openModal;
+// Mémoriser les services chargés pour le select
+window.__setServices = (list)=>{ SERVICES = list; fillServiceSelect(); };
+</script>
+
+</body>
+</html>
