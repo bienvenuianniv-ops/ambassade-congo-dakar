@@ -145,6 +145,11 @@
   .scard h3{font-size:1.18rem}
   .scard p{margin:0;color:var(--muted);font-size:.95rem;flex:1}
   .scard .meta{font-size:.8rem;color:var(--green-deep);font-weight:600;letter-spacing:.03em}
+  .scard .pieces{margin-top:4px;border-top:1px solid var(--line);padding-top:12px}
+  .pieces-title{display:block;font-size:.72rem;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .scard .pieces ul{margin:0;padding-left:18px}
+  .scard .pieces li{font-size:.86rem;color:var(--ink);margin:2px 0;line-height:1.4}
   .scard .book{margin-top:6px;font-weight:600;font-size:.92rem;text-decoration:none;color:var(--green-deep);
     background:none;border:0;padding:0;cursor:pointer;text-align:left;font-family:inherit}
   .scard .book:hover{color:var(--green)}
@@ -492,13 +497,25 @@ async function loadServices(){
       return;
     }
     grid.classList.add('grid');
-    grid.innerHTML = data.map(s => `
+    grid.innerHTML = data.map(s => {
+      // Découper les pièces sur ';' — n'afficher la section que si non vide
+      const pieces = (s.pieces_requises || '')
+        .split(';').map(p => p.trim()).filter(Boolean);
+      const piecesHtml = pieces.length
+        ? `<div class="pieces">
+             <span class="pieces-title">Pièces à fournir</span>
+             <ul>${pieces.map(p => `<li>${escapeHtml(p)}</li>`).join('')}</ul>
+           </div>`
+        : '';
+      return `
       <article class="scard">
         <h3>${escapeHtml(s.nom)}</h3>
         <p>${escapeHtml(s.description || 'Démarche consulaire.')}</p>
         ${s.duree_min ? `<span class="meta">Rendez-vous ~ ${escapeHtml(s.duree_min)} min</span>` : ''}
+        ${piecesHtml}
         <button class="book" type="button" data-service="${escapeHtml(s.id)}">Prendre rendez-vous</button>
-      </article>`).join('');
+      </article>`;
+    }).join('');
     // alimenter le formulaire et brancher les boutons des cartes
     if(window.__setServices) window.__setServices(data);
     grid.querySelectorAll('.book[data-service]').forEach(btn=>{
