@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Espace agent — Ambassade de la République du Congo à Dakar</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-deep:#08402B; --green:#009543; --gold:#E5B80B; --red:#CE1126;
+    --paper:#FBF9F4; --ink:#16201A; --muted:#5C6660; --line:#E4E0D6; --card:#FFFFFF;
+    --amber:#B07A00;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:600;margin:0;line-height:1.15}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  .crest{width:34px;height:34px;border-radius:50%;flex:0 0 auto;
+    background:linear-gradient(135deg,var(--green) 0 49%,var(--gold) 49% 58%,var(--red) 58% 100%);
+    border:2px solid var(--green-deep)}
+  button{font-family:inherit;cursor:pointer}
+  .eyebrow{font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--green)}
+
+  /* ---------- LOGIN ---------- */
+  #loginView{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .login-card{background:var(--card);border:1px solid var(--line);border-radius:14px;width:100%;max-width:400px;
+    overflow:hidden;box-shadow:0 24px 60px -28px rgba(8,64,43,.45)}
+  .login-top{background:var(--green-deep);color:#fff;padding:26px 28px;position:relative}
+  .login-top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+    background:linear-gradient(90deg,var(--green) 0 40%,var(--gold) 40% 70%,var(--red) 70% 100%)}
+  .login-top .row{display:flex;align-items:center;gap:12px}
+  .login-top h1{font-size:1.15rem;color:#fff}
+  .login-top .sub{font-size:.72rem;color:rgba(255,255,255,.7);margin-top:2px;letter-spacing:.04em}
+  .login-body{padding:28px}
+  .login-body h2{font-size:1.4rem;margin-bottom:4px}
+  .login-body .hint{color:var(--muted);font-size:.86rem;margin-bottom:20px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:.8rem;font-weight:600;margin-bottom:6px}
+  .field input{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:8px;
+    font-family:inherit;font-size:.95rem;background:#fff}
+  .field input:focus{outline:none;border-color:var(--green)}
+  .btn-primary{width:100%;background:var(--green-deep);color:#fff;border:0;padding:13px;border-radius:8px;
+    font-weight:600;font-size:.98rem;transition:background .15s}
+  .btn-primary:hover{background:var(--green)}
+  .btn-primary:disabled{opacity:.55;cursor:not-allowed}
+  .msg{padding:10px 13px;border-radius:8px;font-size:.86rem;margin-bottom:16px;display:none}
+  .msg.show{display:block}
+  .msg.err{background:#fdecec;border:1px solid #f6c9c9;color:#a01b1b}
+  .msg.info{background:#eef6f1;border:1px solid #cfe6da;color:var(--green-deep)}
+
+  /* ---------- DASHBOARD ---------- */
+  #dashView{display:none}
+  .topbar{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+  .topbar .inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .topbar .brand{display:flex;align-items:center;gap:12px}
+  .topbar .brand b{font-family:"Fraunces",serif;font-weight:600;font-size:.98rem;line-height:1.1;display:block}
+  .topbar .brand span{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .topbar .right{display:flex;align-items:center;gap:16px}
+  .who{font-size:.84rem;color:var(--muted);text-align:right}
+  .who b{color:var(--ink);display:block;font-size:.9rem}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink);
+    padding:8px 14px;border-radius:7px;font-weight:600;font-size:.84rem}
+  .btn-ghost:hover{border-color:var(--green-deep);color:var(--green-deep)}
+
+  .dash-head{padding:30px 0 10px}
+  .dash-head h2{font-size:1.7rem}
+  .dash-head p{color:var(--muted);margin:6px 0 0;font-size:.92rem}
+
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 18px;min-width:96px}
+  .stat .n{font-family:"Fraunces",serif;font-size:1.6rem;font-weight:600}
+  .stat .l{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 20px}
+  .filter{background:var(--card);border:1.5px solid var(--line);border-radius:20px;padding:7px 15px;
+    font-size:.84rem;font-weight:500;color:var(--muted)}
+  .filter.active{background:var(--green-deep);border-color:var(--green-deep);color:#fff}
+
+  .rdv-list{display:flex;flex-direction:column;gap:12px;padding-bottom:60px}
+  .rdv{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--muted);
+    border-radius:11px;padding:18px 20px}
+  .rdv.s-en-attente{border-left-color:var(--amber)}
+  .rdv.s-confirme{border-left-color:var(--green)}
+  .rdv.s-termine{border-left-color:var(--green-deep)}
+  .rdv.s-annule{border-left-color:var(--red)}
+  .rdv-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+  .rdv-ref{font-family:"Fraunces",serif;font-size:1.05rem;font-weight:600;letter-spacing:.02em}
+  .rdv-name{font-weight:600;margin:2px 0 0}
+  .rdv-service{color:var(--green-deep);font-size:.88rem;font-weight:500}
+  .pill{font-size:.72rem;font-weight:600;padding:4px 11px;border-radius:20px;letter-spacing:.03em;white-space:nowrap}
+  .pill.s-en-attente{background:#fdf3da;color:var(--amber)}
+  .pill.s-confirme{background:#e4f3ea;color:var(--green-deep)}
+  .pill.s-termine{background:#e2e9e4;color:var(--green-deep)}
+  .pill.s-annule{background:#fdecec;color:var(--red)}
+  .rdv-meta{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0;font-size:.84rem;color:var(--muted)}
+  .rdv-meta b{color:var(--ink);font-weight:600}
+  .rdv-actions{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:13px}
+  .act{border:1.5px solid var(--line);background:#fff;border-radius:7px;padding:7px 13px;font-size:.83rem;font-weight:600;color:var(--ink)}
+  .act:hover{border-color:var(--green-deep)}
+  .act.confirm{color:var(--green-deep)}.act.confirm:hover{background:var(--green-deep);color:#fff;border-color:var(--green-deep)}
+  .act.done{color:var(--green)}.act.done:hover{background:var(--green);color:#fff;border-color:var(--green)}
+  .act.cancel{color:var(--red)}.act.cancel:hover{background:var(--red);color:#fff;border-color:var(--red)}
+  .act:disabled{opacity:.5;cursor:not-allowed}
+
+  .state{text-align:center;padding:50px 20px;color:var(--muted)}
+  .state.err{color:var(--red)}
+  .skel{height:96px;border-radius:11px;background:linear-gradient(100deg,#f0ede5 30%,#f7f5ef 50%,#f0ede5 70%);
+    background-size:200% 100%;animation:sh 1.2s infinite}
+  @keyframes sh{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+  @media (max-width:560px){
+    .topbar .inner{height:auto;padding:10px 0;flex-wrap:wrap;gap:8px}
+    .who{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN ================= -->
+<div id="loginView">
+  <div class="login-card">
+    <div class="login-top">
+      <div class="row">
+        <span class="crest" aria-hidden="true"></span>
+        <div>
+          <h1>République du Congo</h1>
+          <div class="sub">Ambassade à Dakar</div>
+        </div>
+      </div>
+    </div>
+    <div class="login-body">
+      <h2>Espace agent</h2>
+      <p class="hint">Connectez-vous pour gérer les rendez-vous consulaires.</p>
+      <div class="msg" id="loginMsg"></div>
+      <div class="field">
+        <label for="email">Adresse e-mail</label>
+        <input id="email" type="email" autocomplete="username" placeholder="agent@…">
+      </div>
+      <div class="field">
+        <label for="pass">Mot de passe</label>
+        <input id="pass" type="password" autocomplete="current-password" placeholder="••••••••">
+      </div>
+      <button class="btn-primary" id="loginBtn">Se connecter</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= DASHBOARD ================= -->
+<div id="dashView">
+  <div class="topbar">
+    <div class="wrap inner">
+      <div class="brand">
+        <span class="crest" aria-hidden="true"></span>
+        <div><b>Ambassade de la République du Congo</b><span>Espace consulaire — Dakar</span></div>
+      </div>
+      <div class="right">
+        <div class="who"><span>Connecté</span><b id="agentName">—</b></div>
+        <button class="btn-ghost" id="logoutBtn">Déconnexion</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="dash-head">
+      <h2>Rendez-vous consulaires</h2>
+      <p>Consultez les demandes reçues et faites évoluer leur statut.</p>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="filters" id="filters">
+      <button class="filter active" data-f="tous">Tous</button>
+      <button class="filter" data-f="en-attente">En attente</button>
+      <button class="filter" data-f="confirme">Confirmés</button>
+      <button class="filter" data-f="termine">Traités</button>
+      <button class="filter" data-f="annule">Annulés</button>
+    </div>
+
+    <div class="rdv-list" id="rdvList" aria-live="polite">
+      <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== CONFIGURATION ===== */
+const API_BASE = "https://mairie-rdv-backend.onrender.com";
+const TOKEN_KEY = "amba_agent_token";
+const NAME_KEY  = "amba_agent_name";
+
+/* ===== Éléments ===== */
+const loginView = document.getElementById('loginView');
+const dashView  = document.getElementById('dashView');
+const loginMsg  = document.getElementById('loginMsg');
+const loginBtn  = document.getElementById('loginBtn');
+const rdvList   = document.getElementById('rdvList');
+
+let RDV = [];           // tous les RDV chargés
+let currentFilter = 'tous';
+
+const LABELS = {
+  'en-attente':'En attente', 'confirme':'Confirmé',
+  'termine':'Traité', 'annule':'Annulé'
+};
+
+function escapeHtml(s){
+  return String(s ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function showMsg(text, kind){
+  loginMsg.textContent = text;
+  loginMsg.className = 'msg show ' + kind;
+}
+
+/* ===== Auth ===== */
+function token(){ return localStorage.getItem(TOKEN_KEY); }
+function authHeaders(){ return { 'Authorization': 'Bearer ' + token() }; }
+
+function showLogin(message){
+  dashView.style.display = 'none';
+  loginView.style.display = 'flex';
+  if(message) showMsg(message, 'info');
+}
+function showDash(){
+  loginView.style.display = 'none';
+  dashView.style.display = 'block';
+  document.getElementById('agentName').textContent = localStorage.getItem(NAME_KEY) || 'Agent';
+  loadRdv();
+}
+function logout(message){
+  localStorage.removeItem(TOKEN_KEY);
+  localStorage.removeItem(NAME_KEY);
+  RDV = [];
+  showLogin(message);
+}
+
+async function login(){
+  const email = document.getElementById('email').value.trim();
+  const pass  = document.getElementById('pass').value;
+  if(!email || !pass){ showMsg("Renseignez votre e-mail et votre mot de passe.", 'err'); return; }
+  loginBtn.disabled = true; loginBtn.textContent = 'Connexion…';
+  try{
+    const res = await fetch(`${API_BASE}/api/auth/connecter`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email, mot_de_passe: pass })
+    });
+    const data = await res.json();
+    if(!res.ok){ showMsg(data.message || "Connexion impossible.", 'err'); return; }
+    localStorage.setItem(TOKEN_KEY, data.token);
+    localStorage.setItem(NAME_KEY, `${data.agent?.prenom||''} ${data.agent?.nom||''}`.trim() || data.agent?.email || 'Agent');
+    loginMsg.className = 'msg';
+    showDash();
+  }catch(err){
+    showMsg("Le serveur est injoignable. Réessayez dans un instant.", 'err');
+  }finally{
+    loginBtn.disabled = false; loginBtn.textContent = 'Se connecter';
+  }
+}
+
+/* ===== Données ===== */
+async function loadRdv(){
+  rdvList.innerHTML = '<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
+  try{
+    const res = await fetch(`${API_BASE}/api/rdv`, { headers: authHeaders() });
+    if(res.status === 401 || res.status === 403){
+      logout("Votre session a expiré. Reconnectez-vous.");
+      return;
+    }
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    RDV = await res.json();
+    renderStats();
+    renderList();
+  }catch(err){
+    rdvList.innerHTML = '<div class="state err">Les rendez-vous n\'ont pas pu être chargés. Vérifiez la connexion et réessayez.</div>';
+  }
+}
+
+function renderStats(){
+  const counts = { 'en-attente':0,'confirme':0,'termine':0,'annule':0 };
+  RDV.forEach(r => { if(counts[r.statut] !== undefined) counts[r.statut]++; });
+  const box = document.getElementById('stats');
+  box.innerHTML = [
+    ['Total', RDV.length],
+    ['En attente', counts['en-attente']],
+    ['Confirmés', counts['confirme']],
+    ['Traités', counts['termine']],
+    ['Annulés', counts['annule']]
+  ].map(([l,n]) => `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+}
+
+function fmtDate(d){
+  try{ return new Date(d).toLocaleDateString('fr-FR',{weekday:'short',day:'2-digit',month:'short',year:'numeric'}); }
+  catch(e){ return d; }
+}
+
+function actionsFor(r){
+  const id = r.id;
+  let btns = '';
+  if(r.statut === 'en-attente'){
+    btns += `<button class="act confirm" data-id="${id}" data-s="confirme">Confirmer</button>`;
+    btns += `<button class="act cancel" data-id="${id}" data-s="annule">Annuler</button>`;
+  } else if(r.statut === 'confirme'){
+    btns += `<button class="act done" data-id="${id}" data-s="termine">Marquer traité</button>`;
+    btns += `<button class="act cancel" data-id="${id}" data-s="annule">Annuler</button>`;
+  } else {
+    // termine ou annule : possibilité de rouvrir en attente
+    btns += `<button class="act" data-id="${id}" data-s="en-attente">Rouvrir</button>`;
+  }
+  return btns;
+}
+
+function renderList(){
+  const list = currentFilter === 'tous' ? RDV : RDV.filter(r => r.statut === currentFilter);
+  if(!list.length){
+    rdvList.innerHTML = '<div class="state">Aucun rendez-vous dans cette catégorie.</div>';
+    return;
+  }
+  rdvList.innerHTML = list.map(r => `
+    <article class="rdv s-${escapeHtml(r.statut)}">
+      <div class="rdv-top">
+        <div>
+          <div class="rdv-ref">${escapeHtml(r.reference)}</div>
+          <p class="rdv-name">${escapeHtml(r.citoyen_prenom)} ${escapeHtml(r.citoyen_nom)}</p>
+          <span class="rdv-service">${escapeHtml(r.service_nom || '')}</span>
+        </div>
+        <span class="pill s-${escapeHtml(r.statut)}">${LABELS[r.statut] || escapeHtml(r.statut)}</span>
+      </div>
+      <div class="rdv-meta">
+        <span><b>${fmtDate(r.date_rdv)}</b></span>
+        <span>à <b>${escapeHtml((r.heure_rdv||'').substr(0,5))}</b></span>
+        <span>Tél : <b>${escapeHtml(r.citoyen_tel||'—')}</b></span>
+        <span>Pièce : <b>${escapeHtml(r.citoyen_nni||'—')}</b></span>
+      </div>
+      <div class="rdv-actions">${actionsFor(r)}</div>
+    </article>`).join('');
+
+  rdvList.querySelectorAll('.act').forEach(b=>{
+    b.addEventListener('click', ()=> changeStatut(b.dataset.id, b.dataset.s, b));
+  });
+}
+
+async function changeStatut(id, statut, btn){
+  const siblings = btn.parentElement.querySelectorAll('.act');
+  siblings.forEach(s => s.disabled = true);
+  btn.textContent = '…';
+  try{
+    const res = await fetch(`${API_BASE}/api/rdv/${id}/statut`, {
+      method:'PUT',
+      headers:{ 'Content-Type':'application/json', ...authHeaders() },
+      body: JSON.stringify({ statut })
+    });
+    if(res.status === 401 || res.status === 403){ logout("Votre session a expiré. Reconnectez-vous."); return; }
+    const data = await res.json();
+    if(!res.ok) throw new Error(data.message || 'Erreur');
+    // mettre à jour localement
+    const r = RDV.find(x => String(x.id) === String(id));
+    if(r) r.statut = statut;
+    renderStats();
+    renderList();
+  }catch(err){
+    siblings.forEach(s => s.disabled = false);
+    alert("Le statut n'a pas pu être modifié. Réessayez.");
+  }
+}
+
+/* ===== Événements ===== */
+loginBtn.addEventListener('click', login);
+document.getElementById('pass').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+document.getElementById('logoutBtn').addEventListener('click', ()=> logout());
+document.getElementById('filters').addEventListener('click', e => {
+  const b = e.target.closest('.filter'); if(!b) return;
+  currentFilter = b.dataset.f;
+  document.querySelectorAll('.filter').forEach(x => x.classList.toggle('active', x === b));
+  renderList();
+});
+
+/* ===== Démarrage ===== */
+if(token()) showDash(); else showLogin();
+</script>
+</body>
+</html>
