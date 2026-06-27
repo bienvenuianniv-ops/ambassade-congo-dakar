@@ -123,8 +123,13 @@
   .word blockquote{margin:0;font-family:"Fraunces",serif;font-size:1.28rem;line-height:1.5;color:var(--ink)}
   .word .sign{margin-top:22px;font-size:.9rem;color:var(--muted)}
   .word .sign b{color:var(--ink);font-weight:600;display:block;font-size:1rem}
-  .placeholder-note{display:inline-block;margin-top:8px;font-size:.74rem;color:var(--red);
-    background:#fdecec;border:1px solid #f6c9c9;border-radius:4px;padding:2px 8px;letter-spacing:.02em}
+  .placeholder-note{display:inline-block;margin-top:8px;font-size:.74rem;color:var(--green-deep);
+    background:#eef6f1;border:1px solid #cfe6da;border-radius:4px;padding:2px 8px;letter-spacing:.02em}
+  .word.reserved .await-quote{display:flex;align-items:flex-start;gap:14px;
+    border-left:3px solid var(--gold);padding:6px 0 6px 20px}
+  .quote-mark{font-family:"Fraunces",serif;font-size:3rem;line-height:.8;color:var(--gold);flex:0 0 auto}
+  .await-text{margin:6px 0 0;font-family:"Fraunces",serif;font-size:1.2rem;font-style:italic;
+    color:var(--muted);line-height:1.5}
 
   /* Services */
   #services{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -277,14 +282,17 @@
       <span class="eyebrow">Présentation</span>
       <h2>Mot de l'Ambassadeur</h2>
     </div>
-    <div class="word">
+    <div class="word reserved">
       <div class="portrait">Photo<br>officielle</div>
       <div>
-        <blockquote>« Notre mission accueille chaque ressortissant et chaque visiteur avec rigueur et disponibilité. La modernisation de nos services consulaires vise un objectif simple : des démarches claires, des délais maîtrisés, et un accueil digne de la République. »</blockquote>
+        <div class="await-quote">
+          <span class="quote-mark">&ldquo;</span>
+          <p class="await-text">Cet espace est réservé au mot de Son Excellence l'Ambassadeur.</p>
+        </div>
         <div class="sign">
-          <b>L'Ambassadeur</b>
+          <b>Son Excellence l'Ambassadeur</b>
           Ambassade de la République du Congo près la République du Sénégal
-          <span class="placeholder-note">Texte de démonstration — à valider et signer par la mission</span>
+          <span class="placeholder-note">Emplacement réservé — texte à venir, à l'appréciation de la Mission</span>
         </div>
       </div>
     </div>
